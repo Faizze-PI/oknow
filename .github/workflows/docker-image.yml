@@ -1,0 +1,34 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main # Trigger on push to the 'main' branch
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to Docker Hub
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: "alekseiy"
+          password: "Avomatkalasnikov"
+
+      # Step 3: Build the Docker image
+      - name: Build Docker Image
+        run: |
+          docker build -t alekseiy/hehehaha:latest .
+
+      # Step 4: Push the Docker image to Docker Hub
+      - name: Push Docker Image
+        run: |
+          docker push alekseiy/hehehaha:latest
+
